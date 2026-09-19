@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kiều Mạnh — Mô tả năng lực kỹ thuật</title>
+<style>
+  :root{
+    --bg:#14181c;
+    --bg-panel:#1b2126;
+    --bg-card:#1f262c;
+    --line:#2b333a;
+    --text:#dfe4e8;
+    --text-dim:#8c98a3;
+    --accent:#c98b3f;
+    --accent-soft:#c98b3f22;
+    --accent2:#4f9d8f;
+    --accent2-soft:#4f9d8f22;
+    --mono:'Consolas','Courier New',monospace;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Segoe UI',Tahoma,Arial,sans-serif;
+    line-height:1.6;
+  }
+  a{color:var(--accent);text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  .layout{display:flex;min-height:100vh;}
+
+  /* Sidebar TOC */
+  nav.toc{
+    width:250px;
+    flex-shrink:0;
+    background:var(--bg-panel);
+    border-right:1px solid var(--line);
+    padding:28px 20px;
+    position:sticky;
+    top:0;
+    height:100vh;
+    overflow-y:auto;
+  }
+  nav.toc .toc-name{font-size:1.05em;font-weight:600;color:var(--text);}
+  nav.toc .toc-role{font-size:0.85em;color:var(--text-dim);margin-bottom:24px;}
+  nav.toc a{
+    display:block;
+    color:var(--text-dim);
+    font-size:0.92em;
+    padding:6px 0;
+    border-left:2px solid transparent;
+    padding-left:10px;
+    margin-left:-12px;
+  }
+  nav.toc a:hover{color:var(--text);text-decoration:none;border-left-color:var(--accent);}
+
+  main{flex:1;padding:48px 56px;max-width:920px;}
+  header.hero{margin-bottom:44px;}
+  header.hero h1{font-size:2em;margin:0 0 6px 0;letter-spacing:0.2px;}
+  header.hero .sub{color:var(--text-dim);font-size:1.05em;}
+  header.hero .meta{margin-top:16px;font-family:var(--mono);font-size:0.85em;color:var(--accent2);}
+
+  section{margin-bottom:52px;scroll-margin-top:24px;}
+  section h2{
+    font-size:1.3em;
+    border-bottom:1px solid var(--line);
+    padding-bottom:10px;
+    margin-bottom:20px;
+  }
+  p{color:var(--text);}
+  p.lead{color:var(--text-dim);}
+
+  .tag-row{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0;}
+  .tag{
+    font-family:var(--mono);
+    font-size:0.82em;
+    background:var(--accent-soft);
+    color:var(--accent);
+    border:1px solid #c98b3f55;
+    padding:4px 10px;
+    border-radius:3px;
+  }
+  .tag.alt{background:var(--accent2-soft);color:var(--accent2);border-color:#4f9d8f55;}
+
+  table.skills{width:100%;border-collapse:collapse;margin-top:10px;}
+  table.skills th, table.skills td{
+    text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);font-size:0.95em;
+  }
+  table.skills th{color:var(--text-dim);font-weight:500;font-size:0.85em;text-transform:none;}
+  table.skills td.level{font-family:var(--mono);color:var(--accent);white-space:nowrap;}
+
+  .card{
+    background:var(--bg-card);
+    border:1px solid var(--line);
+    border-left:3px solid var(--accent);
+    border-radius:4px;
+    padding:20px 22px;
+    margin-bottom:18px;
+  }
+  .card.closed{border-left-color:var(--accent2);}
+  .card h3{margin:0 0 4px 0;font-size:1.08em;}
+  .card .stack{font-family:var(--mono);font-size:0.8em;color:var(--text-dim);margin-bottom:10px;}
+  .card p{margin:8px 0;font-size:0.95em;}
+  .card .links{margin-top:12px;font-size:0.88em;}
+  .card .badge{
+    display:inline-block;
+    font-family:var(--mono);
+    font-size:0.72em;
+    padding:2px 8px;
+    border-radius:3px;
+    margin-left:8px;
+    vertical-align:middle;
+  }
+  .badge.public{background:var(--accent2-soft);color:var(--accent2);}
+  .badge.private{background:#3a3a3a;color:#aaa;}
+
+  .note{
+    background:var(--bg-panel);
+    border:1px dashed var(--line);
+    border-radius:4px;
+    padding:16px 20px;
+    color:var(--text-dim);
+    font-size:0.92em;
+  }
+
+  code{font-family:var(--mono);background:#00000033;padding:1px 5px;border-radius:3px;font-size:0.92em;}
+  ul.plain{padding-left:20px;margin:8px 0;}
+  ul.plain li{margin-bottom:5px;font-size:0.95em;}
+
+  @media (max-width:800px){
+    .layout{flex-direction:column;}
+    nav.toc{width:100%;height:auto;position:relative;border-right:none;border-bottom:1px solid var(--line);}
+    main{padding:32px 20px;}
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+
+  <nav class="toc">
+    <div class="toc-name">Kiều Mạnh</div>
+    <div class="toc-role">Lập trình viên hệ thống</div>
+    <a href="#tong-quan">Tổng quan</a>
+    <a href="#ngon-ngu">Ngôn ngữ &amp; công cụ</a>
+    <a href="#chuyen-mon">Mảng chuyên môn</a>
+    <a href="#du-an">Dự án tiêu biểu</a>
+    <a href="#ghi-chu">Ghi chú</a>
+  </nav>
+
+  <main>
+    <header class="hero" id="tong-quan">
+      <h1>Kiều Mạnh</h1>
+      <div class="sub">Lập trình viên hệ thống — tự học, chuyên sâu Windows/Win32, tích hợp Excel, hạ tầng mạng nội bộ</div>
+      <div class="meta"><a href="https://github.com/KieuManh366377" target="_blank" rel="noopener">github.com/KieuManh366377</a></div>
+    </header>
+
+    <section>
+      <p class="lead">
+        Tự học lập trình từ VB/VB6, qua VB.NET, rồi chuyên sâu Delphi/C++ Builder (RAD Studio)
+        và Go trong nhiều năm. Thế mạnh nằm ở tầng hệ thống/hạ tầng — nơi hầu hết công cụ dựng
+        sẵn (framework, thư viện có sẵn) không giải quyết được: can thiệp sâu vào Win32 API,
+        thiết kế giao thức mạng riêng, và ghép nối nhiều ngôn ngữ/nền tảng với nhau ở mức ABI.
+      </p>
+      <p>
+        Đã tự tay xây dựng và đưa vào sử dụng thực tế nhiều hệ thống độc lập — không phải bài tập
+        hay chứng chỉ, mà là sản phẩm chạy thật, có người dùng thật, một số đã công khai một phần
+        trên GitHub. Danh sách bên dưới liệt kê đúng những gì đã làm được, kèm mức độ thành thạo
+        từng công cụ.
+      </p>
+      <div class="note">
+        <strong style="color:var(--text);">Một điều nói thẳng trước:</strong> con đường học của tôi
+        là tự học hoàn toàn, không qua trường lớp CNTT chính quy — đi thẳng từ việc giải quyết bài
+        toán thật (VB6 → VB.NET → Delphi/C++ Builder → Go), rồi mới dần ghép lại thành hiểu biết hệ
+        thống. Vì vậy có thể có lúc tôi gọi sai tên một khái niệm hàn lâm, hoặc chưa quen thuật ngữ
+        chuẩn mà người học bài bản hay dùng — dù phần kỹ thuật đứng sau đã hiểu và tự giải quyết
+        được, như các dự án liệt kê dưới đây thể hiện. Nói trước điều này để nếu có lúc cần hỏi lại
+        một thuật ngữ, đó chỉ là khoảng trống về cách gọi tên, không phải khoảng trống về năng lực.
+      </div>
+    </section>
+
+    <section id="ngon-ngu">
+      <h2>Ngôn ngữ &amp; công cụ</h2>
+      <table class="skills">
+        <tr><th>Ngôn ngữ / Công cụ</th><th>Mức độ</th><th>Ghi chú</th></tr>
+        <tr>
+          <td>Delphi / C++ Builder (RAD Studio 13.1)</td>
+          <td class="level">Thành thạo, nhiều năm</td>
+          <td>VCL, XLL/COM Add-in cho Excel, Win32 API (GDI/COM/WMI), DPI-aware UI</td>
+        </tr>
+        <tr>
+          <td>Go</td>
+          <td class="level">Thành thạo</td>
+          <td>DLL (cgo/c-shared), CLI tool, xử lý mạng, crypto, tích hợp CNN model (ONNX)</td>
+        </tr>
+        <tr>
+          <td>VB6 / VBA</td>
+          <td class="level">Thành thạo, nền tảng gốc</td>
+          <td>Tự động hoá Excel, gọi DLL ngoài, client cho các hệ thống RPC tự viết</td>
+        </tr>
+        <tr>
+          <td>Win32 API cấp thấp</td>
+          <td class="level">Chuyên sâu</td>
+          <td>WOW64 internals, PE/ABI, machine code sinh động (JIT), loader lock, message hook</td>
+        </tr>
+        <tr>
+          <td>Python</td>
+          <td class="level">Mới bắt đầu</td>
+          <td>Đọc/sửa script, tích hợp thư viện xử lý dữ liệu (openpyxl, python-docx)</td>
+        </tr>
+      </table>
+    </section>
+
+    <section id="chuyen-mon">
+      <h2>Mảng chuyên môn</h2>
+      <div class="tag-row">
+        <span class="tag">Excel Add-in (COM / XLL)</span>
+        <span class="tag">Win32 API / GDI / COM / WMI</span>
+        <span class="tag">Thiết kế giao thức RPC qua TCP</span>
+        <span class="tag">Gọi hàm liên-ngôn-ngữ qua ABI (JIT invoker)</span>
+        <span class="tag">Xử lý âm thanh (DSP, giải mã, resample)</span>
+        <span class="tag">Bảo vệ/cấp phép phần mềm (RSA, anti-tamper)</span>
+        <span class="tag">Tự động hoá portal có CAPTCHA (CNN)</span>
+        <span class="tag">DPI-aware UI đa nền</span>
+      </div>
+      <p class="lead">
+        Điểm chung của các mảng trên: đều là những bài toán "hạ tầng" — làm một lần, dùng lại
+        nhiều lần, và thường bị né tránh vì khó debug, ít tài liệu, dễ sai ở chi tiết nhỏ
+        (calling convention, DPI scaling, race condition, định dạng file nhị phân).
+      </p>
+    </section>
+
+    <section id="du-an">
+      <h2>Dự án tiêu biểu</h2>
+
+      <div class="card">
+        <h3>InputInExcel <span class="badge public">Đã công khai</span></h3>
+        <div class="stack">C++ Builder · XLL API · Win32 GDI</div>
+        <p>
+          Add-in gợi ý nhập liệu tức thời ngay trong ô Excel (type-ahead), lọc nhiều cột cùng lúc,
+          không chiếm focus khỏi ô đang gõ — giải quyết đúng lỗi kinh điển khiến nhiều người bỏ
+          cuộc khi tự làm popup gợi ý trong Excel (mất focus, ghi nhầm dữ liệu sang ô khác).
+        </p>
+        <div class="links">GitHub: <a href="https://github.com/KieuManh366377/InputInExcel" target="_blank" rel="noopener">github.com/KieuManh366377/InputInExcel</a></div>
+      </div>
+
+      <div class="card">
+        <h3>RegXHelper <span class="badge public">Đã công khai</span></h3>
+        <div class="stack">C++ Builder · System.RegularExpressions · COM Dual Interface</div>
+        <p>
+          DLL COM miễn phí mở lớp <code>System.RegularExpressions</code> của C++ Builder ra cho
+          VBA/VB6 dùng trực tiếp qua <code>CreateObject</code> — không cần .NET, không cần cài đặt
+          phức tạp, chỉ đăng ký DLL là dùng được trong Excel/Word/Access. Cung cấp đầy đủ các hàm
+          xử lý regex (Execute, Replace, Split, lấy nhóm theo tên/chỉ số, xuất kết quả dạng JSON).
+        </p>
+        <div class="links">GitHub: <a href="https://github.com/KieuManh366377/RegXHelper-COM-DLL-for-Regular-Expressions-in-VBA-VB6" target="_blank" rel="noopener">github.com/KieuManh366377/RegXHelper-COM-DLL-for-Regular-Expressions-in-VBA-VB6</a></div>
+      </div>
+
+      <div class="card">
+        <h3>ListCollection.dll <span class="badge public">Đã công khai</span></h3>
+        <div class="stack">C++ Builder · COM Dual Interface (IDispatch/IUnknown)</div>
+        <p>
+          DLL COM cung cấp đối tượng <code>List</code> đầy đủ tính năng cho VBA — thêm/xoá/chèn/thay
+          thế theo vị trí, tìm kiếm có/không phân biệt hoa-thường, sắp xếp, xuất mảng Variant, và hỗ
+          trợ duyệt bằng <code>For Each</code> ngay trong VBA nhờ triển khai <code>_NewEnum</code> —
+          bù đắp cho việc VBA/VB6 vốn không có sẵn kiểu List/Collection mạnh như ngôn ngữ hiện đại.
+        </p>
+        <div class="links">GitHub: <a href="https://github.com/KieuManh366377/ListCollection.dll-COM-DLL-for-VBA-List-Management" target="_blank" rel="noopener">github.com/KieuManh366377/ListCollection.dll-COM-DLL-for-VBA-List-Management</a></div>
+      </div>
+
+      <div class="card">
+        <h3>Excel Intellisense XLL <span class="badge public">Đã công khai (binary)</span></h3>
+        <div class="stack">Delphi · XLL API · Excel 32/64-bit</div>
+        <p>
+          Add-in cho hàm VBA tự viết trong workbook: hiện tooltip gợi ý tham số y hệt hàm gốc Excel
+          (tên tham số, mô tả, giá trị mặc định, tự xuống dòng và kẹp gọn trong màn hình), và tuỳ
+          chọn đăng ký hàm VBA đó thành hàm Excel thật (xuất hiện trong Insert Function, đúng nhóm,
+          đúng tên tham số, đúng loại lỗi trả về). Thêm hàm mới chỉ cần sửa file XML, add-in tự
+          HotReload trong vài giây, không cần build lại .xll hay khởi động lại Excel.
+        </p>
+        <div class="links">GitHub: <a href="https://github.com/KieuManh366377/excel-intellisense-xll" target="_blank" rel="noopener">github.com/KieuManh366377/excel-intellisense-xll</a></div>
+      </div>
+
+      <div class="card">
+        <h3>GoogleSvc.dll <span class="badge public">Đã công khai (binary)</span></h3>
+        <div class="stack">Go · Google Sheets/Drive/Gmail/Calendar/Docs API</div>
+        <p>
+          DLL kết nối trực tiếp tài khoản Google cá nhân (Sheets, Drive, Gmail, Calendar, Docs) qua
+          OAuth do chính người dùng tự cấp — dữ liệu không đi qua máy chủ trung gian nào. Kèm hướng
+          dẫn từng bước tạo OAuth Client trên Google Cloud Console cho người không rành kỹ thuật.
+        </p>
+        <div class="links">Hướng dẫn: <a href="https://kieumanh366377.github.io/googlesvc-guide/" target="_blank" rel="noopener">kieumanh366377.github.io/googlesvc-guide</a></div>
+      </div>
+
+      <div class="card">
+        <h3>GoToolsVSCode <span class="badge public">Đã công khai (binary)</span></h3>
+        <div class="stack">Delphi · Win32 native · VS Code tasks.json</div>
+        <p>
+          Bộ 8 công cụ .exe thuần Win32 (không PowerShell, không phụ thuộc ngoài) tích hợp thẳng vào
+          VS Code cho việc phát triển Go: build DLL/EXE có obfuscation, kiểm tra song song nhiều
+          project (go vet, staticcheck, build), theo dõi file tự động build khi lưu (dùng
+          <code>ReadDirectoryChangesW</code>, không polling), dọn dẹp, đồng bộ go.mod, và scaffold
+          project mới — cấu hình một lần, dùng chung cho mọi workspace Go trên máy.
+        </p>
+        <div class="links">GitHub: <a href="https://github.com/KieuManh366377/GoToolsVSCode" target="_blank" rel="noopener">github.com/KieuManh366377/GoToolsVSCode</a></div>
+      </div>
+
+      <div class="card">
+        <h3>RPC / Bridge Data Server <span class="badge private">Lõi giữ riêng</span></h3>
+        <div class="stack">Delphi (BridgeCore) · C++ Builder (BridgeInvoker64) · Go (AuthToken)</div>
+        <p>
+          Hạ tầng máy chủ trung tâm cho phép client bất kỳ ngôn ngữ (VB6/VBA, Excel...) đọc/ghi/tìm
+          kiếm dữ liệu (Access, SQLite) qua IP:Port, thay cho cách chia sẻ thư mục mạng dễ gây khoá
+          file/hỏng dữ liệu. Có thêm lớp gọi được bất kỳ hàm trong bất kỳ DLL nào trên máy chủ
+          (sinh mã máy Win64 ABI lúc runtime), không phân biệt client 32/64-bit hay hệ điều hành.
+        </p>
+        <div class="links">GitHub (bản cơ bản): <a href="https://github.com/KieuManh366377/RPC-Data-Server-cho-Microsoft-Access" target="_blank" rel="noopener">github.com/KieuManh366377/RPC-Data-Server-cho-Microsoft-Access</a></div>
+      </div>
+
+      <div class="card">
+        <h3>X64Bridge <span class="badge public">Đã công khai</span></h3>
+        <div class="stack">VB6/VBA · WOW64 Segment Trick</div>
+        <p>
+          Cho phép ứng dụng 32-bit (VB6/VBA/Delphi Win32) gọi thẳng vào DLL 64-bit trong cùng máy,
+          bằng cách tự đổi chế độ CPU (segment selector) và tự đọc PE64 export table — không cần
+          tiến trình trung gian.
+        </p>
+        <div class="links">GitHub: <a href="https://github.com/KieuManh366377/X64Bridge-Call-64-bit-DLL-from-VB6-VBA-32-bit-using-WOW64-Segment-Trick" target="_blank" rel="noopener">github.com/KieuManh366377/X64Bridge-...-WOW64-Segment-Trick</a></div>
+      </div>
+
+      <div class="card">
+        <h3>Speech-to-Text tiếng Việt <span class="badge public">Đã công khai (DLL)</span></h3>
+        <div class="stack">C++ Builder (giải mã/chuẩn hoá âm thanh) · Go + whisper.cpp (nhận dạng)</div>
+        <p>
+          Pipeline hai DLL: một DLL đọc file âm thanh/video bất kỳ định dạng, tự giải mã và chuẩn
+          hoá về PCM 16-bit Mono 16kHz (viết tay bộ lọc DSP, không phụ thuộc ffmpeg ngoài); một DLL
+          nhận PCM, chạy whisper.cpp để chuyển thành văn bản tiếng Việt. Đã kiểm thử thành công qua
+          VBA/Excel với âm thanh thật.
+        </p>
+        <div class="links">GitHub: <a href="https://github.com/KieuManh366377/SpeechToTextDLL" target="_blank" rel="noopener">github.com/KieuManh366377/SpeechToTextDLL</a></div>
+      </div>
+
+      <div class="card closed">
+        <h3>Tự động hoá vượt xác thực CAPTCHA <span class="badge private">Nội bộ</span></h3>
+        <div class="stack">Go · Model CNN tự train (ONNX)</div>
+        <p>
+          Tự huấn luyện model nhận dạng ký tự (CNN) để tự động vượt qua bước xác thực CAPTCHA khi
+          cần thu thập dữ liệu quy mô lớn từ các cổng thông tin công khai, độ chính xác trên 97%,
+          kèm công cụ gán nhãn tự động để mở rộng tập dữ liệu huấn luyện. Có bản CLI chạy song song
+          nhiều luồng và bản DLL gọi được từ Delphi.
+        </p>
+      </div>
+
+      <div class="card closed">
+        <h3>IntegrityGuard <span class="badge private">Nội bộ</span></h3>
+        <div class="stack">Delphi · Go (CLI)</div>
+        <p>
+          Hệ thống bảo vệ toàn vẹn DLL và cấp phép phần mềm dựa trên RSA-2048: chữ ký số, nhiều
+          lớp chống can thiệp bộ nhớ (anti-tamper), cấp phép khoá theo máy (Machine ID từ phần
+          cứng), kèm công cụ quản lý key độc lập.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Hạ tầng UI/tiện ích nội bộ khác</h3>
+        <div class="stack">Delphi/C++ Builder</div>
+        <ul class="plain">
+          <li>Bộ base class VCL nhận biết DPI chuẩn, dùng chung cho mọi Add-in/EXE, tránh lỗi
+            scale-đôi font khi chạy trong tiến trình Excel</li>
+          <li>Chuyển đổi bộ công cụ XLL (IntelliSense, autocomplete công thức, UDF bất đồng bộ)
+            từ Delphi sang C++ Builder, chạy trên Win64</li>
+          <li>Add-in làm nổi bật hàng/cột đang chọn trong Excel bằng lớp overlay GDI, không đổi
+            định dạng ô gốc</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="ghi-chu">
+      <h2>Ghi chú</h2>
+      <div class="note">
+        Các dự án đánh dấu "Nội bộ" hoặc phần lõi của hệ thống RPC/Bridge không công khai mã
+        nguồn — đây là nguyên tắc áp dụng chung cho mọi bên, không riêng dự án nào. Sẵn sàng demo
+        trực tiếp, trao đổi kiến trúc, hoặc phát triển mới/tuỳ biến theo đúng yêu cầu công việc.
+      </div>
+    </section>
+
+  </main>
+</div>
+</body>
+</html>
